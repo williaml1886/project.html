@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <title>Processing Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
+    <script>
+        var dogX;//
+        var block1;
+        var block2;
+        var block3;
+        var block4;
+        var block5;
+        function setup() {
+            createCanvas(600, 800);
+            block1 = new Block();
+            block2 = new Block();
+            block3 = new Block();
+            block4 = new Block();
+            block5 = new Block();
+        }
+
+        function draw() {
+            background(0, 0, 102);
+            fill(153, 255, 255);
+            stroke(153, 255, 255);
+            rect(100, 0, 400, 800);
+            stroke(0, 102, 102);
+            strokeWeight(15);
+            rect(100, -10, 400, 900);
+            moveDog();
+            fill(255, 0, 0);
+            stroke(255, 0, 0);
+            block1.move();
+            block1.display();
+            block1.checkCollide();
+            block2.move();
+            block2.display();
+            block2.checkCollide();
+            block3.move();
+            block3.display();
+            block3.checkCollide();
+            block4.move();
+            block4.display();
+            block4.checkCollide();
+            block5.move();
+            block5.display();
+            block5.checkCollide();
+            
+
+
+        }
+
+        function moveDog() {
+            dogX = mouseX - 20;
+            stroke(random(255), random(255), random(255));
+            strokeWeight(1)
+            fill(255, 255, 204);
+            ellipse(dogX, 740, 40, 70);
+            fill(255, 255, 204);
+            ellipse(dogX, 700, 40, 40);
+            fill(255, 255, 204);
+            ellipse(dogX, 790, 10, 40);
+            ellipse(dogX - 20, 700, 10, 20);
+            ellipse(dogX + 20, 700, 10, 20);
+
+        }
+
+        function Block() {
+            this.x = random(width);
+            this.y = random(height);
+            this.speed = random(0, 20);
+
+            this.move = function() {
+                if (this.y < height) {
+                    this.y += this.speed;
+                }
+                if (this.y > height) {
+                    this.y = 0;
+                }
+
+            }
+            this.display = function() {
+                rect(this.x, this.y, 75, 50);
+            }
+            this.checkCollide = function() {
+                if (this.y > 600 && this.x + 75 > dogX - 20 && this.x < dogX + 20) {
+                    text("GAME OVER!", width / 2.25, height / 2);
+                    noLoop();
+                }
+            }
+
+
+        }
+        /**/
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
